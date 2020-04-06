@@ -7,22 +7,29 @@ import random
 # def hitCard():
 #     return(str(random.randrange(2, 11)))
 
-class playerUser:
+class player:
     playerPoints = 0
-    initialCards = []
+    playerCards = []
 
 
     def hitCard(self):
-        return(str(random.randrange(2, 11)))
+        return(random.randrange(2, 11))
 
     def gamePrinter(self):
-        playerUser.initialCards.append(self.hitCard()) # Give player initial card 0
-        playerUser.initialCards.append(self.hitCard()) # Give player initial card 1
+        player.playerCards.append(self.hitCard()) # Give player initial card 0
+        player.playerCards.append(self.hitCard()) # Give player initial card 1
         print("Welcome to Manny's Blackjack program!")
-        print("You get a " + playerUser.initialCards[0] + " and a " + playerUser.initialCards[1])
-        print(self.initialCards)
+        print("You get a " + str(player.playerCards[0]) + " and a " + str(player.playerCards[1]))
+        print("Your total is " + str(sum(player.playerCards)))
+        print(player.playerCards)
 
-p = playerUser()
+class dealer:
+    dealerPoints = 0
+    delearCards = []
+
+
+
+p = player()
 
 p.gamePrinter()
 
