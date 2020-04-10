@@ -49,13 +49,17 @@ class gameLogic:
         print("The dealer has a " + str(self.dealer0.delearCards[0]) + " showing, and a hidden card")
 
         while self.pTotal < 21:
-            userChoice = input("""Would you like to "H"it or "S"tay?""")
+            userChoice = str(input("""Would you like to "H"it or "S"tay ('E'XIT)? """))
 
+            if userChoice == "E" or userChoice == 'e':
+                quit()
             if userChoice == "H" or userChoice == "h":
                 self.blablaguy.hitCard()
+                print(str(sum(self.blablaguy.playerCards)))
+            if userChoice == "S" or userChoice == "s":
+                print("Your current total: " + str(sum(self.blablaguy.playerCards)))
 
-            elif userChoice == "S" or userChoice == "s":
-                print("Your current total: " + str(self.pTotal))
+
 
         # Pseudocode for implementing reading user input
         # if
