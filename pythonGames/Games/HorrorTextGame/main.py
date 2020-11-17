@@ -3,6 +3,11 @@ from os import system
 import time 
 from time import sleep 
 import sys 
+from player import Player
+from tools import Tools
+
+
+
 
 black = "\033[0;30m"
 purple = "\033[0;35m"
@@ -12,41 +17,32 @@ red = "\033[0;31m"
 yellow = "\033[0;33m"
 white = "\033[0;37m"
 
+
+
+
+
 def scrollingText(text):
     for char in text:
         sys.stdout.write(char)
         sys.stdout.flush()
         time.sleep(0.1)
 
-class Player:
-    userName = ""
-    tools = []
-    time = 0
-    hitPoints = 100
-    isAlive = True
-    fearLevel = 0
-
-
-    def deathCheck():
-        if hitPoints == 0:
-            this.isAlive = False
-
-class Tools:
-    isSharp = False
-    canFish = False
-    toolMaker = False # Is this a prereq for other tools?
-
+def clearScreen():
+    system('clear')
 
 
 user = Player()
 print(red)
+scrollingText("The Haunting\n\nA psychological thriller built with love and hope\nEnjoy the experience, see you on the other side!\n\n\n-E")
+time.sleep(3)
+clearScreen()
 scrollingText("Please choose a username: ")
-time.sleep(1)
+clearScreen()
 user.userName = input()
-scrollingText("Fear Level, 0 - 4: ")
+scrollingText(f"{user.userName}?\n0) As weak as a baby \n1) Stronger than a toddler \n2) I can cook my own meals \n3) I'll fight when needed \n4) Here to save others\n\n")
 if int(input()):
     user.fearLevel = int(input())
-    system('clear')
+    clearScreen()
 else:
     print("Invalid number")
     time.sleep(.4)
@@ -55,7 +51,15 @@ else:
 
 
 if user.fearLevel == 0:
-    aasds = ""
+    print(white)
+    scrollingText("It's been a long drive through what you can only make out as blue with passing green patches, you feel tingling on your stomach and just can't make out the feeling")
+    print("0) Cry\n1) Laugh\n2) Sleep")
+
+    if int(input()):
+        
+
+    if 
+
 elif user.fearLevel == 1:
     pholder = ""
 elif user.fearLevel == 2:
