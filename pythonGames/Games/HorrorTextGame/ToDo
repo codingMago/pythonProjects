@@ -1,0 +1,18 @@
+- File IO
+    - Handle savegame
+        - High scores
+        - Track user analytics
+            - Easier to understand reasoning of choices
+                - Think something like TellTale Games' at the end of a chapter
+        Positives
+        Problems
+
+    - File Security
+        Steps
+        - Add encryption to File
+            - AES-256
+        - Could add 2FA, by one time passthrough (OTP)
+        Positives
+        - 
+        Problems
+        - How will we encrypt/decrypt?
