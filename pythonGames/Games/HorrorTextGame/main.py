@@ -56,10 +56,8 @@ if user.fearLevel == 0:
     print("0) Cry\n1) Laugh\n2) Sleep")
 
     if int(input()):
+        print("hello world!")
         
-
-    if 
-
 elif user.fearLevel == 1:
     pholder = ""
 elif user.fearLevel == 2:
