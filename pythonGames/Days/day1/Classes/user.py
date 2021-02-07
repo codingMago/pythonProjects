@@ -1,4 +1,4 @@
-class User:
+class Character:
     userName = ""
     userAge = ""
 
@@ -7,3 +7,8 @@ class AI:
 class Database:
     memBoi = AI
     x = 10
+
+
+print("Hello user.")
+user = Character()
+print(user)
