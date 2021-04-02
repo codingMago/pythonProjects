@@ -1,7 +1,7 @@
 import sys
 import os
 import console, sound 
-from random import * # Used for eightBall
+from random import randint # Used for eightBall
 
 
 # Shorthand functions 
@@ -11,13 +11,13 @@ nobSound = lambda: sound.play_effect('game:Woosh_1') # Nobleman's signature soun
 roySound = lambda: sound.play_effect('game:Ding_3') # Royalty's signature sound
 
 class Player():
-	level = 0
-	health = 0
-	stamina = 0
-	mana = 0
-	xp = 0
-	gp = 0
-	className = ''
+	level = 0 # Track of progress
+	health = 0 # Track HP
+	stamina = 0 # Track energy
+	mana = 0 # Track magic potential
+	xp = 0 # Track level-up progress
+	gp = 0 # Track gold pieces (currency)
+	className = '' # Track classtype
 	
 	# Classes will be set default values according to characteristics
 	def classChoice(self, choice): # Initial class choice
@@ -59,11 +59,12 @@ class Player():
 	# Perhaps later make it so bosses can level up too
 	def islevelUP(self, experience):
 
-		currentXP = self.getXP() + experience # 
+		currentXP = self.getXP() + experience # Keep track of current total experience
 
 		if currentXP >= 100:
 			sound.play_effect('arcade:Powerup_1')
-			self.setLVL(1) # Base upgrade
+			self.level += 1 # Base upgrade
+			self.xp -= 100
 			
 			if self.className == "Peasant": 
 				self.setHP(self.getHP() + 10)
@@ -71,19 +72,17 @@ class Player():
 				self.setMana(self.getMana() + 5)
 				# Total = 21
 				
-			if self.className == "Nobleman":
+			elif self.className == "Nobleman":
 				self.setHP(self.getHP() + 4)
 				self.setStam(self.getStam() + 4)
 				self.setMana(self.getMana() + 8)
 				# Total = 16
 			
-			if self.className == "Royalty":
+			elif self.className == "Royalty":
 				self.setHP(self.getHP() + 2)
 				self.setStam(self.getStam() + 3)
 				self.setMana(self.getMana() + 10)
 				# Total = 15
-			
-			self.xp -= 100
 		
 		else:
 			self.setXP(currentXP)
@@ -130,86 +129,115 @@ class RPGame():
 		# Game setup
 		cls()
 		sound.play_effect('game:Click_1')
+		self.characterChoice(player)
 		
 		while self.isAlive == True:
-			self.characterChoice(player)
+
 			# Adventure time
 			self.adventure(player)
 			# implement timer, 1-2 seconds
 	
 	def characterChoice(self, player):
-		secondChoice = 0
 		
-		while secondChoice == 0:
+		while self.isAlive == True: # While user hasn't decided to exit
 			cls()
 			userChoice = int(input("Pick a class\n\n1. Peasant\n2. Nobleman\n3. Royalty\n0. Exit"))
 			
-			if userChoice == 1:
+			if userChoice == 1: # User might pick to be a peasant
 				cls()
 				peaSound()
 
 				print("Due to years of backbreaking work, Caldria's peasants are known to have a high tolerance for even the most grueling of tasks.\n\n")
-				secondChoice = int(input("Is this your class?\n1. Yes, I'm a peasant\n0. No, let me check others"))
+				classChoice = int(input("Is this your class?\n1. Yes, I'm a peasant\n0. No, let me check others"))
 				
-				if secondChoice == 1:
+				if classChoice == 1:
 					player.classChoice(userChoice)
-			
-			if userChoice == 2:
+					return
+
+			elif userChoice == 2: # User might choose a nobleman
 				cls()
 				nobSound()
 
 				print("Born to a strong house with servants aplenty, the Caldrian noblemen are considered chivalrous and known to be healthy.\n\n")
-				secondChoice = int(input("Is this your class?\n1. Yes, I'm a Nobleman\n0. No, let me check others"))
+				classChoice = int(input("Is this your class?\n1. Yes, I'm a Nobleman\n0. No, let me check others"))
 				
-				if secondChoice == 1:
+				if classChoice == 1:
 					player.classChoice(userChoice)
+					return
 			
-			if userChoice == 3:
+			elif userChoice == 3: # Perhaps user went for royalty
 				cls()
 				roySound()
 
 				print("Caldria's royalty are renown for their short temper, it's said that the magical books they looted from surrounding nations have essentially changed them.\n\n")
-				secondChoice = int(input("Is this your class?\n1. Yes, I'm Royalty\n0. No, let me check others"))
+				classChoice = int(input("Is this your class?\n1. Yes, I'm Royalty\n0. No, let me check others"))
 				
-				if secondChoice == 1:
+				if classChoice == 1:
 					player.classChoice(userChoice)
+					return
 					 	
-			if userChoice == 0:
+			elif userChoice == 0:
 				self.isAlive = False
 				return
-							
+				
 							
 	def adventure(self, player):
 		
 		cls()
-		userChoice = 1
 		
-		while userChoice != 0:
+		while self.isAlive == True:
 			self.displayStats(player)
-			userChoice = int(input('1. Explore\n2. Items\n3. Stats\n0. Exit'))
+			userChoice = int(input('1. Explore\n2. Inventory\n3. Stats\n0. Exit'))
 			cls()
 			
-			if userChoice == 1:
-				print('Troll up ahead')
-			elif userChoice == 2:
+			if userChoice == 1: # Explore
+				# In order of priority
+				# Add chance for combat, traveling merchant, find treasure, dungeon, town
+				# encounter = randint(1, 100) # Decides what encounter to launch
+				# if encounter <= 33:
+				# 	self.combat(player)
+				# elif encounter > 33 and encounter < 
+				self.combat(player)
+
+			elif userChoice == 2: # Inventory
 				print('No items collected')
-			elif userChoice == 3:
+			elif userChoice == 3: # Player stats
 				if player.getHP() >= 50:
 					print("I'm okay")
 				else:
 					print("I could use some healing")
+			elif userChoice == 0: # Exit game
+				self.isAlive = False
+
+	def combat(self, player):
+
+		combatHP = player.getHP()
+		while combatHP > 0: # While player is still in the game
+			cls()
+
+			
+
+
+		print("Ambush!")
+		self.displayStats(player)
+
+
 
 	
-	def displayStats(self, player):
-		 print(f'HP: {player.getHP()} | MP: {player.getMana()}\n')
+	def displayStats(self, player): # For most menus
+		print(f'{player.className}\nHP: {player.getHP()} | MP: {player.getMana()}\n')
 	
-	
+	def displayFullStats(self, player): # For when user wants/needs to see their total stats
+		print(f'{player.className}\nHP: {player.getHP()} | MP: {player.getMana()}\nGP: {player.getGP()} | XP: {player.getXP()}\n')
+
+
+
 class EightBall():
 	
 	def runGame(self):
 		cls()
 		userChoice = 1
-		sound.play_effect('casino:DieShuffle3')
+		sound.play_effect('casino:DieThrow3')
 		
 		# While user doesnt wanna leave
 		while userChoice != 0:
@@ -219,56 +247,58 @@ class EightBall():
 			cls()
 			
 			if userChoice == 1:
-				sound.play_effect('casino:DieThrow3')
+				sound.play_effect('casino:DieShuffle3')
 				self.rollBall()
 			
 	def rollBall(self):
 		side = randint(0,7)
 
 		if side == 0:
-			print("Believe so")
+			print("Believe so\n")
 		elif side == 1:
-			print("Muddy waters")
+			print("Muddy waters\n")
 		elif side == 2:
-			print("It's dark in here")
+			print("It's dark in here\n")
 		elif side == 3:
-			print("Yes")
+			print("Yes\n")
 		elif side == 4:
-			print("Don't bet on it")
+			print("Don't bet on it\n")
 		elif side == 5:
-			print("Could you repeat that?")
+			print("Could you repeat that?\n")
 		elif side == 6:
-			print("No")
+			print("No\n")
 		elif side == 7:
-			print("Sleep on it")
-		
-		print('\n')
+			print("Sleep on it\n")
 	
 def main():
 	
-	gameChoice = 1
+	isAlive = True
 	
-	while gameChoice != 0:
+	while isAlive == True:
 	
 		cls()
 		sound.play_effect('digital:HighDown')
-		print("Arcade NULL\n\nPick a game\n1. RPG -- In Progress\n2. EightBall -- TBD\n3. Load Save\n0. Exit")
+		print("NULL Arcade\n\nPick a game\n1. RPG -- In Progress\n2. EightBall -- Stable\n3. Load Save -- TBD\n0. Exit")
 		gameChoice = int(input())
 		
-		if gameChoice == 1:
+		if gameChoice == 1: # Run RPG
 			game = RPGame()
 			player = Player()
 			game.startGame(player)
 			del game, player
-			
-		elif gameChoice == 2:
+
+
+		elif gameChoice == 2: # Run EightBall
 			game = EightBall()
 			game.runGame()
-			# implement random
-			# switch random 
+			del game
 		
-		elif gameChoice == 3:
-			fileName = input("saveName: ")
-			gameSave = open(fileName, "w+")
-# Run program
-main()
+		elif gameChoice == 3: # Load/Create a save file 
+			print("TBD")
+			# fileName = input("saveName: ")
+			# gameSave = open(fileName, "w+")
+
+		elif gameChoice == 0:
+			isAlive = False
+
+main() # Run program
