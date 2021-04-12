@@ -3,11 +3,11 @@
 
 # Find the sum of all the multiples of 3 or 5 below 1000.
 
-x = 10
+x = 1000
 
 def multiples3and5():
     arHolder = []
-    for i in range(1, 10):
+    for i in range(1, x):
         if i % 3 == 0 or i % 5 == 0:
             arHolder.append(i)
     
