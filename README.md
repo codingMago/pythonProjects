@@ -1,10 +1,6 @@
-pythonProjects
+Welcome to my Python page, you'll find samples of my work here and see skill progression over time.
 
-
-Under construction
-- Blackjack
-
-Future
-- Snake
-- Tic tac toe
-- Chess
+Samples
+- iOS games
+- Mathematical problem solving
+- DSA Practice
