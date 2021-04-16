@@ -9,21 +9,20 @@ arrHolder = [1, 2] # Holds values we've gone through
 fibHolder = [] # Holds values to sum
 maxNum = 4_000_000
 
-def fibFinder():
-    while arrHolder[-1] <= maxNum:
+def fibFinder(number):
+    while arrHolder[-1] <= number: # While last slot doesn't go over 4M
         arrHolder.append(arrHolder[-1]+arrHolder[-2])
     
-    if arrHolder[-1] > maxNum:
+    if arrHolder[-1] > number: # If last slot does go over 4M
         arrHolder.pop()
 
-    for i in arrHolder:
-        if i % 2 == 0:
+    for i in arrHolder: # Loop all fib numbers
+        if i % 2 == 0: # If it's even, append to another array
             fibHolder.append(i)
             
     return(sum(fibHolder))
-# 4613732
     
-print(fibFinder())
+print(fibFinder(maxNum))
 
             
 
