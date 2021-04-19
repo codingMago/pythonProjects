@@ -9,8 +9,8 @@ def twoSum():
     for i in nums:
         remainder = target - i
         
-        if remainder - 
-        pHolder.append(i)
+        # if remainder - 
+        # pHolder.append(i)
         
 
     # for i, j in enumerate(nums):
