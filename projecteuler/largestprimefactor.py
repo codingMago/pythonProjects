@@ -2,15 +2,26 @@
 # What is the largest prime factor of the number 600851475143 ?
 
 target = 13195
-primeHolder = []
 
-def primefactor(num):
-    for i in range(1, num+1):
-        
-        print(i)
+def primefactor(target):
+    # Variable initialization
+    primeFactors = []
 
-print(target/5)
-print(5*7*13*29)
-print(13195 / 5)
-print(2639 / 7)
-print(377/ 13)
+    # Initial condition
+    while target != 1:
+        for i in range(2, target+1): # Loop from begnning of possible prime #'s
+            remainder = target/i
+            divisorString = str(remainder)
+
+            if ".0" in divisorString[-2:] and i % 2 != 0: # As long as i seems to be a prime
+                target = int(remainder)
+                primeFactors.append(i)
+                break
+    
+    return primeFactors
+
+primefactor(600851475143)
+
+# x = 1234
+# s = str(x)
+# print(s[-2:])
