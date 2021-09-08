@@ -11,7 +11,7 @@ nobSound = lambda: sound.play_effect('game:Woosh_1') # Nobleman's signature soun
 roySound = lambda: sound.play_effect('game:Ding_3') # Royalty's signature sound
 
 class Player():
-	level = 0 # Track of progress
+	level = 0 # Track progress
 	health = 0 # Track HP
 	currentHP = health
 	stamina = 0 # Track energy
